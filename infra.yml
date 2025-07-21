@@ -10,9 +10,9 @@ Resources:
   MyS3Bucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: !Sub "utkarsh-bucket-${UniqueSuffix}"
+      BucketName: !Sub "pritha-bucket-${UniqueSuffix}"
  
   MySQSQueue:
     Type: AWS::SQS::Queue
     Properties:
-      QueueName: !Sub "utkarsh-queue-${UniqueSuffix}"
+      QueueName: !Sub "pritha-queue-${UniqueSuffix}"
