@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Description: Create S3 bucket and SQS queue with unique suffix
+Description: Create S3 bucket, SQS queue, and EC2 instance with unique suffix
  
 Parameters:
   UniqueSuffix:
@@ -10,9 +10,31 @@ Resources:
   MyS3Bucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: !Sub "pritha-bucket-${UniqueSuffix}"
+      BucketName: !Sub "pritha123-bucket-${UniqueSuffix}"
  
   MySQSQueue:
     Type: AWS::SQS::Queue
     Properties:
-      QueueName: !Sub "pritha-queue-${UniqueSuffix}"
+      QueueName: !Sub "pritha321-queue-${UniqueSuffix}"
+ 
+  MyEC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: ami-03bb6d83c60fc5f7c
+      InstanceType: t2.micro
+      SecurityGroups:
+        - !Ref MySecurityGroup
+ 
+  MySecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Allow SSH and HTTP access
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
